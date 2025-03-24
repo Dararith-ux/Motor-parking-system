@@ -1,10 +1,12 @@
 import java.io.*;
+import java.util.Date;
 import java.util.Scanner;
 
 public class checkin {
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException {
         Scanner scanner = new Scanner(System.in);
         int id = getID(scanner);
+        Date currentdate = new Date();
         scanner.close();
         String[] userInfo = getUserInfo(id);
         if (userInfo != null) {
@@ -12,6 +14,9 @@ public class checkin {
             System.out.println("Name: " + userInfo[0]);
             System.out.println("ID: " + userInfo[1]);
             System.out.println("License Plate: " + userInfo[2]);
+            BufferedWriter writer = new BufferedWriter(new FileWriter("check_in.txt", true));
+            writer.write(userInfo[0] + ", " + userInfo[1] + ", " + userInfo[2] + ", " +currentdate+"\n");
+            writer.close();
         } else {
             System.out.println("Access Denied! ID not found.");
         }
@@ -40,7 +45,7 @@ public class checkin {
                 }
             }
         } catch (FileNotFoundException e) {
-            System.out.println("⚠ Error: register.txt not found!");
+            System.out.println("Error: register.txt not found!");
         } catch (IOException e) {
             e.printStackTrace();
         }

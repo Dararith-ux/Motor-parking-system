@@ -15,8 +15,7 @@ public class register {
 
             String licensePlate = getLicensePlate(scanner);
             BufferedWriter writer = new BufferedWriter(new FileWriter("register.txt", true));
-            writer.write(name + ", " + id + ", " + licensePlate);
-            writer.newLine();
+            writer.write(name + ", " + id + ", " + licensePlate+"\n");
             writer.close();
 
             System.out.println("✅ Registration saved successfully!");
