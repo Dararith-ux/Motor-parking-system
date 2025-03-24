@@ -33,6 +33,7 @@ public class checkout {
     }
 
     public static String[] getUserInfo(int id) {
+        String [] latestCheckin = null;
         try (BufferedReader reader = new BufferedReader(new FileReader("check_in.txt"))) {
             String line;
             while ((line = reader.readLine()) != null) {
@@ -41,7 +42,7 @@ public class checkout {
                     try {
                         int validID = Integer.parseInt(parts[1].trim());
                         if (id == validID) {
-                            return parts;
+                            latestCheckin = parts;
                         }
                     } catch (NumberFormatException e) {
                     }
@@ -52,13 +53,11 @@ public class checkout {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        return null;
+        return latestCheckin;
     }
     public static String getDate(Date currentdate) {
         currentdate = new Date();
         SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy, HH:mm");
         return formatter.format(currentdate);
-    }{
-
     }
 }
