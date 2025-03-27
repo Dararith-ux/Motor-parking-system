@@ -7,37 +7,24 @@ public class checkout {
     public static void main(String[] args) {
         checkoutMain();
     }
-    public static void checkoutMain(){
+    public static void checkoutMain() {
         Scanner scanner = new Scanner(System.in);
         System.out.println("Welcome to the Check-out System");
-        int id;
-        String[] userInfo = null;
+        int id = getID(scanner);
+        String[] userInfo = getUserInfo(id);
         while (userInfo == null) {
+            System.out.println("Access Denied! ID not found.");
+            System.out.print("Please input ID again: ");
             id = getID(scanner);
             userInfo = getUserInfo(id);
-
-            if (userInfo == null) {
-                System.out.println("Access Denied! ID not found.");
-                System.out.println("Please input ID again.");
-            }
         }
-
-        Date currentdate = new Date();
-        scanner.close();
-
+        Date currentDate = new Date();
         System.out.println("Check-out successfully!!!!!!!");
         System.out.println("Name: " + userInfo[0]);
         System.out.println("ID: " + userInfo[1]);
         System.out.println("Plate Number: " + userInfo[2]);
-
-        try (BufferedWriter writer = new BufferedWriter(new FileWriter("check_out.txt", true))) {
-            writer.write(userInfo[0] + ", " + userInfo[1] + ", " + userInfo[2] + ", " + getDate(currentdate) + "\n");
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        writeToFile(userInfo[0], Integer.parseInt(userInfo[1]), userInfo[2], currentDate);
     }
-
-
     public static int getID(Scanner scanner) {
         int id;
         System.out.print("Please enter your ID: ");
@@ -54,9 +41,8 @@ public class checkout {
             System.out.print("Please enter your ID as a Numerical Positive Value: ");
         }
     }
-
     public static String[] getUserInfo(int id) {
-        String [] latestCheckin = null;
+        String[] latestCheckin = null;
         try (BufferedReader reader = new BufferedReader(new FileReader("check_in.txt"))) {
             String line;
             while ((line = reader.readLine()) != null) {
@@ -68,19 +54,24 @@ public class checkout {
                             latestCheckin = parts;
                         }
                     } catch (NumberFormatException e) {
+                        continue;
                     }
                 }
             }
         } catch (FileNotFoundException e) {
-            System.out.println("Error: register.txt not found!");
+            System.out.println("Error: check_in.txt not found!");
         } catch (IOException e) {
             e.printStackTrace();
         }
         return latestCheckin;
     }
-    public static String getDate(Date currentdate) {
-        currentdate = new Date();
-        SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy, HH:mm");
-        return formatter.format(currentdate);
+    public static void writeToFile(String name, int id, String licensePlate, Date currentDate) {
+        try (BufferedWriter writer = new BufferedWriter(new FileWriter("check_out.txt", true))) {
+            SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy, HH:mm");
+            writer.write(name + ", " + id + ", " + licensePlate + ", " + formatter.format(currentDate) + "\n");
+            System.out.println("✅ Check-out saved successfully!");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 }
