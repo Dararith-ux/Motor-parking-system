@@ -5,18 +5,19 @@ public class register {
     public static void main(String[] args) {
         try {
             Scanner scanner = new Scanner(System.in);
-
             String name = getName(scanner);
             int id = getID(scanner);
-            if (idExists(id)) {
-                System.out.println("ID already exists! Registration failed.");
-                return;
+
+            while (idExists(id)) {
+                System.out.println("ID already exists! Please enter ID again.");
+                id = getID(scanner);
             }
 
             String licensePlate = getLicensePlate(scanner);
             BufferedWriter writer = new BufferedWriter(new FileWriter("register.txt", true));
-            writer.write(name + ", " + id + ", " + licensePlate+"\n");
+            writer.write(name + ", " + id + ", " + licensePlate + "\n");
             writer.close();
+
 
             System.out.println("✅ Registration saved successfully!");
 
@@ -30,12 +31,22 @@ public class register {
         return scanner.nextLine();
     }
 
-    public static int getID(Scanner scanner) {
-        System.out.print("Please enter your ID: ");
-        int id = scanner.nextInt();
-        scanner.nextLine();
-        return id;
-    }
+        public static int getID(Scanner scanner) {
+            int id;
+            System.out.print("Please enter your ID: ");
+            while (true) {
+                if (scanner.hasNextInt()) {
+                    id = scanner.nextInt();
+                    if (id > 0) {
+                        scanner.nextLine();
+                        return id;
+                    }
+                } else {
+                    scanner.next();
+                }
+                System.out.print("Please enter your ID as a Numerical Positive Value: ");
+            }
+        }
 
     public static String getLicensePlate(Scanner scanner) {
         System.out.print("Please enter your license plate: ");
