@@ -4,33 +4,54 @@ import java.util.Date;
 import java.util.Scanner;
 
 public class checkin {
-    public static void main(String[] args) throws IOException {
+    public static void main(String[] args) {
+        checkinMain();
+    }
+    public static void checkinMain(){
         Scanner scanner = new Scanner(System.in);
-        System.out.print("Welcome to the Check-in System");
-        int id = getID(scanner);
+        System.out.println("Welcome to the Check-in System");
+        int id;
+        String[] userInfo = null;
+        while (userInfo == null) {
+            id = getID(scanner);
+            userInfo = getUserInfo(id);
+
+            if (userInfo == null) {
+                System.out.println("Access Denied! ID not found.");
+                System.out.println("Please input ID again.");
+            }
+        }
+
         Date currentdate = new Date();
         scanner.close();
-        String[] userInfo = getUserInfo(id);
-        if (userInfo != null) {
-            System.out.println("Access Granted!");
-            System.out.println("Name: " + userInfo[0]);
-            System.out.println("ID: " + userInfo[1]);
-            System.out.println("License Plate: " + userInfo[2]);
-            BufferedWriter writer = new BufferedWriter(new FileWriter("check_in.txt", true));
-            writer.write(userInfo[0] + ", " + userInfo[1] + ", " + userInfo[2] + ", " +getDate(currentdate)+"\n");
-            writer.close();
-        } else {
-            System.out.println("Access Denied! ID not found.");
+
+        System.out.println("Check-in successfully!!!!!!!");
+        System.out.println("Name: " + userInfo[0]);
+        System.out.println("ID: " + userInfo[1]);
+        System.out.println("Plate Number: " + userInfo[2]);
+
+        try (BufferedWriter writer = new BufferedWriter(new FileWriter("check_in.txt", true))) {
+            writer.write(userInfo[0] + ", " + userInfo[1] + ", " + userInfo[2] + ", " + getDate(currentdate) + "\n");
+        } catch (IOException e) {
+            e.printStackTrace();
         }
     }
-
     public static int getID(Scanner scanner) {
-        System.out.print("Enter ID: ");
-        int id = scanner.nextInt();
-        scanner.nextLine();
-        return id;
+        int id;
+        System.out.print("Please enter your ID: ");
+        while (true) {
+            if (scanner.hasNextInt()) {
+                id = scanner.nextInt();
+                if (id > 0) {
+                    scanner.nextLine();
+                    return id;
+                }
+            } else {
+                scanner.next();
+            }
+            System.out.print("Please enter your ID as a Numerical Positive Value: ");
+        }
     }
-
     public static String[] getUserInfo(int id) {
         try (BufferedReader reader = new BufferedReader(new FileReader("register.txt"))) {
             String line;
@@ -58,4 +79,5 @@ public class checkin {
         SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy, HH:mm");
         return formatter.format(currentdate);
     }
+
 }
