@@ -18,7 +18,6 @@ public class Main {
                         System.out.print("\nDo you want to continue registering? (1=Yes, 0=No): ");
                         int continueChoice = scanner.nextInt();
                         scanner.nextLine();
-
                         if (continueChoice != 1) {
                             break;
                         }
@@ -27,11 +26,9 @@ public class Main {
                 case 2:
                     while (true) {
                         cin.checkinMain();
-
                         System.out.print("\nDo you want to continue checking in? (1=Yes, 0=No): ");
                         int continueChoice = scanner.nextInt();
                         scanner.nextLine();
-
                         if (continueChoice != 1) {
                             break;
                         }
@@ -40,11 +37,9 @@ public class Main {
                 case 3:
                     while (true) {
                         cout.checkoutMain();
-
                         System.out.print("\nDo you want to continue checking out? (1=Yes, 0=No): ");
                         int continueChoice = scanner.nextInt();
-                        scanner.nextLine(); // Consume newline
-
+                        scanner.nextLine();
                         if (continueChoice != 1) {
                             break;
                         }
