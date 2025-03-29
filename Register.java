@@ -1,20 +1,21 @@
 import java.io.*;
 import java.util.Scanner;
 
-public class register {
+public class Register {
     public static void main(String[] args) {
         registerMain();
     }
     public static void registerMain() {
         Scanner scanner = new Scanner(System.in);
+        System.out.println("Welcome to Register System");
         String name = getName(scanner);
         int id = getID(scanner);
         while (idExists(id)) {
             System.out.println("ID already exists! Please enter ID again.");
             id = getID(scanner);
         }
-        String licensePlate = getplatenumber(scanner);
-        writetoFile(name, id, licensePlate);
+        String platenumber = getPlateNumber(scanner);
+        writetoFile(name, id, platenumber);
     }
     public static String getName(Scanner scanner) {
         System.out.print("Please enter your name: ");
@@ -36,7 +37,7 @@ public class register {
             System.out.print("Please enter your ID as a Numerical Positive Value: ");
         }
     }
-    public static String getplatenumber(Scanner scanner) {
+    public static String getPlateNumber(Scanner scanner) {
         final String platePattern = "2[A-Z]{2}-\\d{4}";
         String platenumber;
         do {
@@ -68,12 +69,14 @@ public class register {
         }
         return false;
     }
-    public static void writetoFile(String name,int id,String licensePlate) {
+    public static void writetoFile(String name,int id,String platenumber) {
         try (BufferedWriter writer = new BufferedWriter(new FileWriter("register.txt", true))){;
-            writer.write(name + ", " + id + ", " + licensePlate + "\n");
+            writer.write(name + ", " + id + ", " + platenumber + "\n");
             writer.close();
-            System.out.println("✅ Registration saved successfully!");
+            System.out.println("Registration saved successfully!");
+            System.out.println("=========================================");
         } catch (IOException e) {
+            System.out.println("Error: register.txt not found!");
             e.printStackTrace();
         }
     }

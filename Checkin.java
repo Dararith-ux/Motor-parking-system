@@ -3,13 +3,14 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Scanner;
 
-public class checkin {
+public class Checkin {
     public static void main(String[] args) {
         checkinMain();
     }
 
     public static void checkinMain() {
         Scanner scanner = new Scanner(System.in);
+        System.out.println("=========================================");
         System.out.println("Welcome to the Check-in System");
 
         int id = getID(scanner);
@@ -23,6 +24,7 @@ public class checkin {
         }
 
         Date currentDate = new Date();
+        System.out.println("=========================================");
         System.out.println("Check-in successfully!!!!!!!");
         System.out.println("Name: " + userInfo[0]);
         System.out.println("ID: " + userInfo[1]);
@@ -77,8 +79,10 @@ public class checkin {
             SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy, HH:mm");
             writer.write(name + ", " + id + ", " + licensePlate + ", " + formatter.format(currentDate) + "\n");
             writer.close();
-            System.out.println("✅ Check-in saved successfully!");
+            System.out.println("Check-in saved successfully!");
+            System.out.println("=========================================");
         } catch (IOException e) {
+            System.out.println("Error: check_in.txt not found!");
             e.printStackTrace();
         }
     }

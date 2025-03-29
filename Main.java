@@ -3,9 +3,9 @@ import java.util.Scanner;
 public class Main {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
-        register reg = new register();
-        checkin cin = new checkin();
-        checkout cout = new checkout();
+        Register reg = new Register();
+        Checkin cin = new Checkin();
+        Checkout cout = new Checkout();
 
         while (true) {
             displayMenu();
@@ -55,7 +55,7 @@ public class Main {
         }
     }
 
-    private static void displayMenu() {
+    public static void displayMenu() {
         System.out.println("\n===== PARKING MANAGEMENT SYSTEM =====");
         System.out.println("1. Register");
         System.out.println("2. Check-In");
