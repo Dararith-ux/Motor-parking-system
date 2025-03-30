@@ -5,22 +5,27 @@ public class Register {
     public static void main(String[] args) {
         registerMain();
     }
+    //registerMain() is the method that process all the program flow and displayed in the main method.
     public static void registerMain() {
         Scanner scanner = new Scanner(System.in);
         System.out.println("Welcome to Register System");
         String name = getName(scanner);
         int id = getID(scanner);
+
         while (idExists(id)) {
             System.out.println("ID already exists! Please enter ID again.");
             id = getID(scanner);
         }
+
         String platenumber = getPlateNumber(scanner);
         writetoFile(name, id, platenumber);
     }
+    //get input name
     public static String getName(Scanner scanner) {
         System.out.print("Please enter your name: ");
         return scanner.nextLine();
     }
+    //get input ID when it is numerical value & it is positive
     public static int getID(Scanner scanner) {
         int id;
         System.out.print("Please enter your ID: ");
@@ -37,6 +42,7 @@ public class Register {
             System.out.print("Please enter your ID as a Numerical Positive Value: ");
         }
     }
+    //get input plate number when it matches the assigned pattern
     public static String getPlateNumber(Scanner scanner) {
         final String platePattern = "2[A-Z]{2}-\\d{4}";
         String platenumber;
@@ -46,18 +52,21 @@ public class Register {
         }while(!platenumber.matches(platePattern));
         return platenumber;
     }
+    //check if the input ID already existed or registered
     public static boolean idExists(int id) {
         try (BufferedReader reader = new BufferedReader(new FileReader("register.txt"))) {
             String line;
+            //when the line has not come to an end during the loop
             while ((line = reader.readLine()) != null) {
                 String[] parts = line.split(", ");
                 if (parts.length >= 2) {
                     try {
-                        int existingID = Integer.parseInt(parts[1].trim());
+                        int existingID = Integer.parseInt(parts[1].trim()); // convert part[1] which is the ID into numerical value and trim if there is useless spaces.
                         if (id == existingID) {
                             return true;
                         }
                     } catch (NumberFormatException e) {
+                        System.out.println("Error! Cannot convert to number! ");
                         continue;
                     }
                 }
@@ -69,7 +78,9 @@ public class Register {
         }
         return false;
     }
+    //method writtoFile is used to write the valid information in to the register.txt file
     public static void writetoFile(String name,int id,String platenumber) {
+        //using bufferwriter to write the input value in accordance with the assigned condition into register.txt file
         try (BufferedWriter writer = new BufferedWriter(new FileWriter("register.txt", true))){;
             writer.write(name + ", " + id + ", " + platenumber + "\n");
             writer.close();
@@ -77,7 +88,6 @@ public class Register {
             System.out.println("=========================================");
         } catch (IOException e) {
             System.out.println("Error: register.txt not found!");
-            e.printStackTrace();
         }
     }
 }
