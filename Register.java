@@ -8,6 +8,7 @@ public class Register {
     //registerMain() is the method that process all the program flow and displayed in the main method.
     public static void registerMain() {
         Scanner scanner = new Scanner(System.in);
+        System.out.println("=========================================");
         System.out.println("Welcome to Register System");
         String name = getName(scanner);
         int id = getID(scanner);
@@ -47,7 +48,7 @@ public class Register {
         final String platePattern = "2[A-Z]{2}-\\d{4}";
         String platenumber;
         do {
-            System.out.print("Please enter your license plate in format 2XX-1234: ");
+            System.out.print("Please enter your platenumber in format 2XX-1234: ");
             platenumber = scanner.nextLine();
         }while(!platenumber.matches(platePattern));
         return platenumber;

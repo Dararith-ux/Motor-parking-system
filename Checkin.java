@@ -15,12 +15,11 @@ public class Checkin {
 
         int id = getID(scanner);
         String[] userInfo = getUserInfo(id);
-        // when ID not found in the file, it process the loop again and again until the return value of userInfo array is not null (name, id, platenumber)
-        while (userInfo == null) {
-            System.out.println("Access Denied! ID not found.");
-            System.out.print("Please input ID again: ");
-            id = getID(scanner);
-            userInfo = getUserInfo(id);
+
+        // Exit immediately if ID is not found
+        if (userInfo == null) {
+            System.out.println("Access Denied! ID not found in the registration list.");
+            return;  // Exit the method
         }
 
         Date currentDate = new Date();
@@ -29,7 +28,8 @@ public class Checkin {
         System.out.println("Name: " + userInfo[0]);
         System.out.println("ID: " + userInfo[1]);
         System.out.println("Plate Number: " + userInfo[2]);
-        //call the writetofile method
+
+        // Call the write-to-file method
         writetocheckinFile(userInfo[0], Integer.parseInt(userInfo[1]), userInfo[2], currentDate);
     }
     //get input ID when it is numerical value & it is positive

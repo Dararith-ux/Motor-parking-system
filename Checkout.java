@@ -16,11 +16,9 @@ public class Checkout {
         int id = getID(scanner);
         String[] userInfo = getUserInfo(id);
         // when ID not found in the file, it process the loop again and again until the return value of userInfo array is not null (name, id, platenumber)
-        while (userInfo == null) {
-            System.out.println("Access Denied! ID not found.");
-            System.out.print("Please input ID again: ");
-            id = getID(scanner);
-            userInfo = getUserInfo(id);
+        if (userInfo == null) {
+            System.out.println("Access Denied! ID not found in the check-in log");
+            return;  // Exit the method
         }
 
         Date currentDate = new Date();
