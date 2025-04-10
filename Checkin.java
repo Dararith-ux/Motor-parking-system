@@ -5,10 +5,10 @@ import java.util.Scanner;
 
 public class Checkin {
     public static void main(String[] args) {
-        checkinMain();
+        processCheckin();
     }
     //checkinMain() is the method that process all the program flow and displayed in the main method.
-    public static void checkinMain() {
+    public static void processCheckin() {
         Scanner scanner = new Scanner(System.in);
         System.out.println("=========================================");
         System.out.println("Welcome to the Check-in System");
@@ -30,7 +30,7 @@ public class Checkin {
         System.out.println("Plate Number: " + userInfo[2]);
 
         // Call the write-to-file method
-        writetocheckinFile(userInfo[0], Integer.parseInt(userInfo[1]), userInfo[2], currentDate);
+        writeToCheckinFile(userInfo[0], Integer.parseInt(userInfo[1]), userInfo[2], currentDate);
     }
     //get input ID when it is numerical value & it is positive
     public static int getID(Scanner scanner) {
@@ -78,11 +78,11 @@ public class Checkin {
         // if ID not found, return null to the array.
         return null;
     }
-    //method writetocheckinFile is used to write the valid info when input id is matched into the chekc_in.txt
-    public static void writetocheckinFile(String name, int id, String licensePlate, Date currentDate) {
+    //method writeToCheckinFile is used to write the valid info when input id is matched into the chekc_in.txt
+    public static void writeToCheckinFile(String name, int id, String plateNumber, Date currentDate) {
         try (BufferedWriter writer = new BufferedWriter(new FileWriter("check_in.txt", true))) {
             SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy, HH:mm");
-            writer.write(name + ", " + id + ", " + licensePlate + ", " + formatter.format(currentDate) + "\n");
+            writer.write(name + ", " + id + ", " + plateNumber + ", " + formatter.format(currentDate) + "\n");
             writer.close();
             System.out.println("Check-in saved successfully!");
             System.out.println("=========================================");

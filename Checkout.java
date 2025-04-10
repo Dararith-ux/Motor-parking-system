@@ -5,10 +5,10 @@ import java.util.Scanner;
 
 public class Checkout {
     public static void main(String[] args) {
-        checkoutMain();
+        processCheckout();
     }
     //checkoutMain() is the method that process all the program flow and displayed in the main method.
-    public static void checkoutMain() {
+    public static void processCheckout() {
         Scanner scanner = new Scanner(System.in);
         System.out.println("=========================================");
         System.out.println("Welcome to the Check-out System");
@@ -28,7 +28,7 @@ public class Checkout {
         System.out.println("ID: " + userInfo[1]);
         System.out.println("Plate Number: " + userInfo[2]);
         System.out.println("Check-In date & time: " + userInfo[3] + ", " + userInfo[4] );
-        writeToFile(userInfo[0], Integer.parseInt(userInfo[1]), userInfo[2], currentDate);
+        writeToCheckoutFile(userInfo[0], Integer.parseInt(userInfo[1]), userInfo[2], currentDate);
     }
     //get input ID when it is numerical value & it is positive
     public static int getID(Scanner scanner) {
@@ -61,7 +61,7 @@ public class Checkout {
                     try {
                         int validID = Integer.parseInt(parts[1].trim());
                         if (id == validID) {
-                            latestCheckin = parts; // return all the part of the student's latest matched ID
+                            latestCheckin = parts; // return all the part of the student's latest matched ID not the fist matched ID during the search
                         }
                     } catch (NumberFormatException e) {
                         System.out.println("Cannot convert ID to number");
@@ -77,11 +77,11 @@ public class Checkout {
         // return null if ID is unmatched or parts if it matched.
         return latestCheckin;
     }
-    //method writetocheckinFile is used to write the valid info when input id is matched into the checkout.txt
-    public static void writeToFile(String name, int id, String licensePlate, Date currentDate) {
+    //method writeToCheckoutFile is used to write the valid info when input id is matched into the checkout.txt
+    public static void writeToCheckoutFile(String name, int id, String plateNumber, Date currentDate) {
         try (BufferedWriter writer = new BufferedWriter(new FileWriter("check_out.txt", true))) {
             SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy, HH:mm");
-            writer.write(name + ", " + id + ", " + licensePlate + ", " + formatter.format(currentDate) + "\n");
+            writer.write(name + ", " + id + ", " + plateNumber + ", " + formatter.format(currentDate) + "\n");
             System.out.println("Check-out saved successfully!");
             System.out.println("=========================================");
         } catch (IOException e) {

@@ -21,7 +21,7 @@ public class Main {
             switch (choice) {
                 case 1:
                     while (true) {
-                        cin.checkinMain();
+                        cin.processCheckin();
                         System.out.print("\nDo you want to continue checking in? (1=Yes, 0=No): ");
                         int continueChoice = scanner.nextInt();
                         scanner.nextLine();
@@ -32,7 +32,7 @@ public class Main {
                     break;
                 case 2:
                     while (true) {
-                        cout.checkoutMain();
+                        cout.processCheckout();
                         System.out.print("\nDo you want to continue checking out? (1=Yes, 0=No): ");
                         int continueChoice = scanner.nextInt();
                         scanner.nextLine();

@@ -3,10 +3,10 @@ import java.util.Scanner;
 
 public class Register {
     public static void main(String[] args) {
-        registerMain();
+        processRegister();
     }
     //registerMain() is the method that process all the program flow and displayed in the main method.
-    public static void registerMain() {
+    public static void processRegister() {
         Scanner scanner = new Scanner(System.in);
         System.out.println("=========================================");
         System.out.println("Welcome to Register System");
@@ -19,7 +19,7 @@ public class Register {
         }
 
         String platenumber = getPlateNumber(scanner);
-        writetoFile(name, id, platenumber);
+        writeToRegisterFile(name, id, platenumber);
     }
     //get input name
     public static String getName(Scanner scanner) {
@@ -46,12 +46,12 @@ public class Register {
     //get input plate number when it matches the assigned pattern
     public static String getPlateNumber(Scanner scanner) {
         final String platePattern = "2[A-Z]{2}-\\d{4}";
-        String platenumber;
+        String plateNumber;
         do {
             System.out.print("Please enter your platenumber in format 2XX-1234: ");
-            platenumber = scanner.nextLine();
-        }while(!platenumber.matches(platePattern));
-        return platenumber;
+            plateNumber = scanner.nextLine();
+        }while(!plateNumber.matches(platePattern));
+        return plateNumber;
     }
     //check if the input ID already existed or registered
     public static boolean idExists(int id) {
@@ -67,7 +67,7 @@ public class Register {
                             return true;
                         }
                     } catch (NumberFormatException e) {
-                        System.out.println("Error! Cannot convert to number! ");
+                        System.out.println("Error! Cannot convert to number! "); // handle error wether the id in the txt cannot be converted to integer
                         continue;
                     }
                 }
@@ -79,16 +79,17 @@ public class Register {
         }
         return false;
     }
-    //method writtoFile is used to write the valid information in to the register.txt file
-    public static void writetoFile(String name,int id,String platenumber) {
+    //method Register is used to write the valid information in to the register.txt file
+    public static void writeToRegisterFile(String name,int id,String plateNumber) {
         //using bufferwriter to write the input value in accordance with the assigned condition into register.txt file
         try (BufferedWriter writer = new BufferedWriter(new FileWriter("register.txt", true))){;
-            writer.write(name + ", " + id + ", " + platenumber + "\n");
+            writer.write(name + ", " + id + ", " + plateNumber + "\n");
             writer.close();
             System.out.println("Registration saved successfully!");
             System.out.println("=========================================");
         } catch (IOException e) {
             System.out.println("Error: register.txt not found!");
+            //error handling wether the txt file is missing
         }
     }
 }
