@@ -43,8 +43,8 @@ The project includes the following Java files:
    ```
 5. Or You can run it directly in text editor like Intellij, Eclipse, or VS code.
    - First run Register.java to register students into the register.txt
-   - Secondly, assuming that students arrive school and we are securities, have to check in there ID. When the ID is input, it should approve access or deny unless their ID is registered or matched with the ID in the register.txt
-   - Moving on to the time that the students leave school, they will be asked for their ID. Again, the ID is input and compare with the ID store in the check_in.txt. If the ID exists in check_in.txt meaning that the students come to school and approve check out. The data will be stored in check_out.txt. *Note** : we are not yet implementing a method that prevent the student from checkin or checkout multiple times. We plan to develop it in the future.
+   - Secondly, assuming that students arrive school and we are securities, have to check in there ID. When the ID is input, it should approve access or deny unless their ID is registered or matched with the ID in the `register.txt`
+   - Moving on to the time that the students leave school, they will be asked for their ID. Again, the ID is input and compare with the ID store in the `check_in.txt`. If the ID exists in check_in.txt meaning that the students come to school and approve check out. The data will be stored in `check_out.txt`. *Note** : we are not yet implementing a method that prevent the student from checkin or checkout multiple times. We plan to develop it in the future.
    
 ---
 
@@ -68,7 +68,7 @@ The system uses the following `.txt` files:
 
 ## 🧑‍💻 Important
 
-- If `register.txt` doesn't exist, the system will create it automatically and also the check_in.txt & check_out.txt
+- If `register.txt` doesn't exist, the system will create it automatically and also the `check_in.txt` & `check_out.txt`
 - Use `BufferedReader` and `BufferedWriter` carefully to avoid file access errors.
 - Customize the UI or expand functionality using a GUI (like Java Swing) in the future or web-based GUI (HTML, CSS, Javascript or other framework)
 
