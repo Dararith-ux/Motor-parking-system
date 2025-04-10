@@ -68,7 +68,7 @@ The system uses the following `.txt` files:
 
 ## 🧑‍💻 Important
 
-- If `register.txt` doesn't exist, the system will create it automatically.
+- If `register.txt` doesn't exist, the system will create it automatically and also the check_in.txt & check_out.txt
 - Use `BufferedReader` and `BufferedWriter` carefully to avoid file access errors.
 - Customize the UI or expand functionality using a GUI (like Java Swing) in the future or web-based GUI (HTML, CSS, Javascript or other framework)
 
