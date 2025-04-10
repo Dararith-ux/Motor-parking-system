@@ -1,8 +1,3 @@
-Sure! Here's a clean and clear `README.md` file for your **Parking Management System** project:
-
----
-
-```markdown
 # 🚗 Parking Management System
 
 This is a simple terminal-based Java program for managing a motorbike parking system. The system allows users to register, check in, and check out using a unique ID and plate number. All data is stored in text files.
@@ -36,7 +31,6 @@ The project includes the following Java files:
 2. **Compile all Java files**:
    ```bash
    javac Main.java Register.java Checkin.java Checkout.java
-   ```
 
 3. **Run the main program**:
    ```bash
